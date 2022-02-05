@@ -1,0 +1,96 @@
+Saved as: Rental.java
+
+public class Rental {
+    // Two public final static fields that hold the number of minutes in an hour and
+    // the hourly rental rate
+    final static int MINUTES_IN_AN_HOUR = 60;
+    final static int RENT_PER_HOUR = 40;
+
+    private String contractNumber;
+    private int hoursRented;
+    private int additionalMinutes;
+    private int total;
+
+    // Two public set methods
+    public void setContractNumber(String x) {
+        contractNumber = x;
+    }
+
+    public void setHoursAndMinutes(int x) {
+
+        int user_input_time = x / MINUTES_IN_AN_HOUR;
+        additionalMinutes = x % MINUTES_IN_AN_HOUR;
+        total = user_input_time * RENT_PER_HOUR + additionalMinutes;
+    }
+
+    // Four public get methods that return the values in the four nonstatic fields.
+    public String getcontractNumber() {
+        return contractNumber;
+    }
+
+    public int gethoursRented() {
+        return hoursRented;
+    }
+
+    public int getAdditionalMinutes() {
+        return additionalMinutes;
+    }
+
+    public int getTotal() {
+        return total;
+    }
+
+    public Rental(String eventNumber, int numberOfGuests) {
+        setContractNumber(eventNumber);
+        setHoursAndMinutes(numberOfGuests);
+    }
+
+    public Rental() {
+        this("A000", 0);
+    }
+}
+
+--------------------------------------------------------------------------------------------------
+
+Saved as RentalDemo.java
+
+import java.util.Scanner;
+import java.util.concurrent.locks.ReentrantLock;
+
+public class RentalDemo {
+    public static void main(String[] args) {
+
+        Rental rent = new Rental();
+        rent.setContractNumber(contract_number());
+        rent.setHoursAndMinutes(rental_amount());
+        Main.displayBanner();
+        displayDetails(rent.getcontractNumber(), rent.RENT_PER_HOUR, rent.getAdditionalMinutes(), rent.getTotal());
+        // Call new constructors
+        Rental event1 = new Rental();
+        Rental event2 = new Rental("A001", 5);
+    }
+
+    public static String contract_number() {
+        Scanner myObj = new Scanner(System.in);
+        System.out.println("Hello enter contract number > ");
+        String user_contract_number = myObj.nextLine();
+        return user_contract_number;
+    }
+
+    public static int rental_amount() {
+        Scanner myObj = new Scanner(System.in); // Create a Scanner object
+        System.out.println("Enter number of minutes of rental: ");
+        int user_input_time = myObj.nextInt(); // Read user input
+        return user_input_time;
+    }
+
+    public static void displayDetails(String w, int x, int y, int z) {
+
+        System.out.println("Contract Number: " + w);
+        System.out.println("Hourly Rate: " + x);
+        System.out.println("Additional minutes: " + y);
+        System.out.println("Total: " + z);
+    }
+
+}
+
